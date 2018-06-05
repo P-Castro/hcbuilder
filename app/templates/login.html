@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="jumbotron">
+      <form class="form-signin" method="post">
+        {{ form.hidden_tag() }}
+        <h2 class="form-signin-heading">Sign in</h2>
+        <p>
+          {{ form.username.label }}<br>
+          {{ form.username(size=32) }}<br>
+          {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </p>
+        <p>
+          {{ form.password.label }}<br>
+          {{ form.password(size=32) }}
+          {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+        </p>
+          <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+      </form>
+
+      <p>New user? <a href="{{ url_for('register') }}">Click to register!</a></p>
+    </div>
+  </div> <!-- /container -->
+{% endblock %}
