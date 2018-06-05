@@ -1,4 +1,4 @@
-#!c:\users\rodri\downloads\flask-tutorials\hcbuilder\venv\scripts\python.exe
+#!c:\users\eipedro\desktop\hcbuilder\venv\scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'alembic==0.9.9','console_scripts','alembic'
 __requires__ = 'alembic==0.9.9'
 import re

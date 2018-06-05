@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\rodri\Downloads\Flask-Tutorials\hcbuilder\venv"
+VIRTUAL_ENV="C:\Users\eipedro\Desktop\hcbuilder\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
