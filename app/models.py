@@ -27,7 +27,7 @@ class Collection(db.Model):
     colle_number = db.Column(db.String(30), index=True, unique=True)
     colle_initials = db.Column(db.String(10), index=True)
     colle_age = db.Column(db.String(60), index=True, unique=True)
-    colle_releasedate = db.Column(db.DateTime, unique=True)
+    colle_releasedate = db.Column(db.DateTime)
     colle_piecequantity = db.Column(db.Integer)
 
     def __repr__(self):
@@ -39,6 +39,7 @@ class Units(db.Model):
     units_realname = db.Column(db.String(64), index=True)
     units_trait = db.Column(db.String(300), index=True)
     units_improvedtarget = db.Column(db.String(50), index=True)
+    units_improvedmoviment = db.Column(db.String(50), index=True)
     units_range = db.Column(db.Integer)
     units_bolts = db.Column(db.Integer)
 
