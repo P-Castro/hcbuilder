@@ -44,6 +44,10 @@ class Units(db.Model):
     units_range = db.Column(db.Integer)
     units_bolts = db.Column(db.Integer)
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.colle_id'))
+    dial_move = db.relationship('Dial_Move', backref='dmove', lazy='dynamic')
+    dial_datack = db.relationship('Dial_Atack', backref='datack', lazy='dynamic')
+    dial_defense = db.relationship('Dial_Defense', backref='ddefense', lazy='dynamic')
+    dial_damage = db.relationship('Dial_Damage', backref='ddamage', lazy='dynamic')
 
     def __repr__(self):
         return '<Units {}>'.format(self.units_name)
@@ -74,11 +78,12 @@ class Dial_Move(db.Model):
     dmove_cor10 = db.Column(db.String(30), index=True)
     dmove_cor11 = db.Column(db.String(30), index=True)
     dmove_cor12 = db.Column(db.String(30), index=True)
+    units_id = db.Column(db.Integer, db.ForeignKey('units.units_id'))
 
     def __repr__(self):
         return '<Dial_Move {}>'.format(self.dmove_id)
 
-class Dial_atack(db.Model):
+class Dial_Atack(db.Model):
     datack_id = db.Column(db.Integer, primary_key=True)
     datack_pos1 = db.Column(db.Integer, index=True)
     datack_pos2 = db.Column(db.Integer, index=True)
@@ -104,12 +109,13 @@ class Dial_atack(db.Model):
     datack_cor10 = db.Column(db.String(30), index=True)
     datack_cor11 = db.Column(db.String(30), index=True)
     datack_cor12 = db.Column(db.String(30), index=True)
+    units_id = db.Column(db.Integer, db.ForeignKey('units.units_id'))
 
     def __repr__(self):
         return '<Dial_atack {}>'.format(self.datack_id)
 
 
-class Dial_defense(db.Model):
+class Dial_Defense(db.Model):
     ddefense_id = db.Column(db.Integer, primary_key=True)
     ddefense_pos1 = db.Column(db.Integer, index=True)
     ddefense_pos2 = db.Column(db.Integer, index=True)
@@ -135,11 +141,12 @@ class Dial_defense(db.Model):
     ddefense_cor10 = db.Column(db.String(30), index=True)
     ddefense_cor11 = db.Column(db.String(30), index=True)
     ddefense_cor12 = db.Column(db.String(30), index=True)
+    units_id = db.Column(db.Integer, db.ForeignKey('units.units_id'))
 
     def __repr__(self):
         return '<Dial_defense {}>'.format(self.ddefense_id)
 
-class Dial_damage(db.Model):
+class Dial_Damage(db.Model):
     ddamage_id = db.Column(db.Integer, primary_key=True)
     ddamage_pos1 = db.Column(db.Integer, index=True)
     ddamage_pos2 = db.Column(db.Integer, index=True)
@@ -165,6 +172,7 @@ class Dial_damage(db.Model):
     ddamage_cor10 = db.Column(db.String(30), index=True)
     ddamage_cor11 = db.Column(db.String(30), index=True)
     ddamage_cor12 = db.Column(db.String(30), index=True)
+    units_id = db.Column(db.Integer, db.ForeignKey('units.units_id'))
 
     def __repr__(self):
         return '<Dial_damage {}>'.format(self.ddamage_id)
