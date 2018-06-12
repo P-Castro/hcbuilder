@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+ <h1> Lista de Coleções</h1>
+    <div>
+          <ul>
+             {% for colle in colle %}
+             <li style="font-size: 30pt"><input type="submit">{{ colle.colle_name }}</li>
+             {% endfor %}
+          </ul>
+    </div>
+{% endblock %}

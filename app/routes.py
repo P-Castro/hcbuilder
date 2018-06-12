@@ -2,13 +2,18 @@ from flask import render_template, redirect, request, url_for, flash
 from app import app, db
 from app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Collection
 from werkzeug.urls import url_parse
 
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html', title='Home Page')
+
+@app.route('/collection')
+def collection():
+    colle = Collection.query.all()
+    return render_template('collection.html', colle=colle, title='Collection')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

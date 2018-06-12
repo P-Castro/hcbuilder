@@ -25,7 +25,7 @@ class Collection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     colle_name = db.Column(db.String(64), index=True)
     colle_initials = db.Column(db.String(10), index=True)
-    colle_age = db.Column(db.String(60), index=True, unique=True)
+    colle_age = db.Column(db.String(60), index=True, unique=True) #tirar atrubuto unique
     colle_releasedate = db.Column(db.String(10))
     colle_piecequantity = db.Column(db.Integer)
     pieces = db.relationship('Pieces', backref='colle_owner', lazy='dynamic')
