@@ -15,6 +15,11 @@ def collection():
     colle = Collection.query.all()
     return render_template('collection.html', colle=colle, title='Collection')
 
+#@app.route('/pieces/<collection>')
+#def pieces(pieces):
+#    pieces = Pieces.query.all()
+#    return render_template('pieces.html', pieces=pieces, title='Pieces')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
