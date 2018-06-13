@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash
 from app import app, db
 from app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Collection
+from app.models import User, Collection, Pieces
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -15,10 +15,12 @@ def collection():
     colle = Collection.query.all()
     return render_template('collection.html', colle=colle, title='Collection')
 
-#@app.route('/pieces/<collection>')
-#def pieces(pieces):
-#    pieces = Pieces.query.all()
-#    return render_template('pieces.html', pieces=pieces, title='Pieces')
+@app.route('/col/<id>')
+def col(id):
+    #col = Pieces.query.filter_by(collection_id = int(id))
+    col = Collection.query.filter_by(id=id)
+    return render_template('colpieces.html', col=col, title='Collection Pieces')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -4,7 +4,7 @@
     <div>
         <ul>
          {% for colle in colle %}
-          <li style="font-size: 30pt" ><input type="image" src="" alt=""><a href="{{ url_for('collection') }}">{{ colle.colle_name }}</a></li>
+          <li style="font-size: 30pt"><a href="{{ url_for('col', id=colle.id) }}">{{ colle.colle_name }}</a></li>
          {% endfor %}
         </ul>
     </div>
