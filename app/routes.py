@@ -18,7 +18,9 @@ def collection():
 @app.route('/col/<id>')
 def col(id):
     #col = Pieces.query.filter_by(collection_id = int(id))
-    col = Collection.query.filter_by(id=id)
+    #ncol = Collection.query.get(int(id))
+    col = Pieces.query.filter_by(collection_id=int(id)).all()
+    #return '<h1>{}</h1>'.format(id)
     return render_template('colpieces.html', col=col, title='Collection Pieces')
 
 

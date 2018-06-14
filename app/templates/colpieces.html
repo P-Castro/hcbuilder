@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
- <h1> col.colle_owner.colle_name </h1>
-    <div>
-        <ul>
-         {% for col in col %}
-        <!--  <li style="font-size: 30pt">{{ col.piece_number, col.piece_name }}</a></li> -->
-          <li style="font-size: 30pt">{{ col.colle_owner.piece_number, col.collection.piece_name }}</a></li>
-         {% endfor %}
-        </ul>
-    </div>
+  <div>
+      <ul>
+        {% for col in col %}
+        <li style="font-size: 30pt">{{ col.piece_number, col.piece_name }}</li>
+        {% endfor %}
+      </ul>
+  </div>
 {% endblock %}
+<!-- col.colle_owner.colle_name-->
