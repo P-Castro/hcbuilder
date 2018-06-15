@@ -3,7 +3,7 @@
   <div>
       <ul>
         {% for col in col %}
-        <li style="font-size: 30pt">{{ col.piece_number, col.piece_name }}</li>
+        <li style="font-size: 30pt"><a href="{{ url_for('pieces', id=col.id) }}">{{ col.piece_number, col.piece_name }}</li>
         {% endfor %}
       </ul>
   </div>

@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div>
+      <ul>
+          <li style="font-size: 30pt">Name: {{ p.piece_name }}</li>
+          <li style="font-size: 30pt">Real name: {{ p.piece_real_name }}</li>
+          <li style="font-size: 30pt">Collection: {{ p.colle_owner.colle_name }}</li>
+      </ul>
+      <table>
+        <th>Dial</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>
+        <th>9</th>
+        <th>10</th>
+        <th>11</th>
+        <th>12</th>
+
+        <tr>
+          <td>Movement</td>
+          <td>{{ dmov.dmov_pos1 }}</td>
+          <td>{{ dmov.dmov_pos2 }}</td>
+          <td>{{ dmov.dmov_pos3 }}</td>
+          <td>{{ dmov.dmov_pos4 }}</td>
+          <td>{{ dmov.dmov_pos5 }}</td>
+          <td>{{ dmov.dmov_pos6 }}</td>
+          <td>{{ dmov.dmov_pos7 }}</td>
+          <td>{{ dmov.dmov_pos8 }}</td>
+          <td>{{ dmov.dmov_pos9 }}</td>
+          <td>{{ dmov.dmov_pos10 }}</td>
+          <td>{{ dmov.dmov_pos11 }}</td>
+          <td>{{ dmov.dmov_pos12 }}</td>
+        </tr>
+        <tr>
+          <td>Attack</td>
+          <td>{{ datk.datk_pos1 }}</td>
+          <td>{{ datk.datk_pos2 }}</td>
+          <td>{{ datk.datk_pos3 }}</td>
+          <td>{{ datk.datk_pos4 }}</td>
+          <td>{{ datk.datk_pos5 }}</td>
+          <td>{{ datk.datk_pos6 }}</td>
+          <td>{{ datk.datk_pos7 }}</td>
+          <td>{{ datk.datk_pos8 }}</td>
+          <td>{{ datk.datk_pos9 }}</td>
+          <td>{{ datk.datk_pos10 }}</td>
+          <td>{{ datk.datk_pos11 }}</td>
+          <td>{{ datk.datk_pos12 }}</td>
+        </tr>
+        <tr>
+          <td>Defense</td>
+          <td>{{ ddef.ddef_pos1 }}</td>
+          <td>{{ ddef.ddef_pos2 }}</td>
+          <td>{{ ddef.ddef_pos3 }}</td>
+          <td>{{ ddef.ddef_pos4 }}</td>
+          <td>{{ ddef.ddef_pos5 }}</td>
+          <td>{{ ddef.ddef_pos6 }}</td>
+          <td>{{ ddef.ddef_pos7 }}</td>
+          <td>{{ ddef.ddef_pos8 }}</td>
+          <td>{{ ddef.ddef_pos9 }}</td>
+          <td>{{ ddef.ddef_pos10 }}</td>
+          <td>{{ ddef.ddef_pos11 }}</td>
+          <td>{{ ddef.ddef_pos12 }}</td>
+        </tr>
+        <tr>
+          <td>Damage</td>
+          <td>{{ ddam.ddam_pos1 }}</td>
+          <td>{{ ddam.ddam_pos2 }}</td>
+          <td>{{ ddam.ddam_pos3 }}</td>
+          <td>{{ ddam.ddam_pos4 }}</td>
+          <td>{{ ddam.ddam_pos5 }}</td>
+          <td>{{ ddam.ddam_pos6 }}</td>
+          <td>{{ ddam.ddam_pos7 }}</td>
+          <td>{{ ddam.ddam_pos8 }}</td>
+          <td>{{ ddam.ddam_pos9 }}</td>
+          <td>{{ ddam.ddam_pos10 }}</td>
+          <td>{{ ddam.ddam_pos11 }}</td>
+          <td>{{ ddam.ddam_pos12 }}</td>
+        </tr>
+      </table>
+  </div>
+{% endblock %}
