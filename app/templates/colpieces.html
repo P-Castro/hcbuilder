@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>Lista de Coleções</h2>
   <div>
       <ul>
         {% for col in col %}
@@ -30,7 +29,7 @@
           </div>
 
           <div class="modal-body">
-            <p>{{col.piece_real_name}}</p>
+            <p>{{ col.piece_real_name }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal"><a href="{{ url_for('pieces', id=col.id) }}">Go to unit page</button>
