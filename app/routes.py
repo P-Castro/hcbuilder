@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 def index():
     return render_template('index.html', title='Home Page')
 
-@app.route('/collection')
+@app.route('/collection', methods=['GET', 'POST'])
 def collection():
     colle = Collection.query.all()
     return render_template('collection.html', colle=colle, title='Collection')
@@ -23,7 +23,7 @@ def col(id):
     #return '<h1>{}</h1>'.format(id)
     return render_template('colpieces.html', col=col, title='Collection Pieces')
 
-@app.route('/pieces/<id>')
+@app.route('/pieces/<id>', methods=['GET', 'POST'])
 def pieces(id):
     p = Pieces.query.filter_by(id = int(id)).first()
     datk = Dial_Attack.query.filter_by(pieces_id=int(id)).first()
