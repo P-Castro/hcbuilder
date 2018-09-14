@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    team = db.relationship('Team', backref='team_owner', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -32,6 +33,23 @@ class Collection(db.Model):
 
     def __repr__(self):
         return '<Collection {}>'.format(self.colle_name)
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    team_name = db.Column(db.String(64), index=True)
+    team_point = db.Column(db.Integer, index=True)
+    team_desc = db.Column(db.String(64), index=True)
+    team_pieces = db.relationship('Pieces', secondary=team_and_pieces, backref=db.backref('team_p', lazy='dynamic'))
+
+    def __repr__(self):
+        return '<Team {}>'.format(self.team_name)
+
+#many-to-many relationship between Team and Pieces
+team_and_pieces = db.Table('team_and_pieces',
+    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.piece_id')),
+    db.Column('team_id', db.Integer, db.ForeignKey('team.team_id'))
+)
+
 
 class Dial_Movement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
