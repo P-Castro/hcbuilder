@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    team = db.relationship('Team', backref='team_owner', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -32,6 +33,23 @@ class Collection(db.Model):
 
     def __repr__(self):
         return '<Collection {}>'.format(self.colle_name)
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    team_name = db.Column(db.String(64), index=True)
+    team_point = db.Column(db.Integer, index=True)
+    team_desc = db.Column(db.String(64), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Team {}>'.format(self.team_name)
+
+#many-to-many relationship between Team and Pieces
+team_and_pieces = db.Table('team_and_pieces',
+    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
+    db.Column('team_id',  db.Integer,  db.ForeignKey('team.id'), primary_key=True)
+)
+
 
 class Dial_Movement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -275,6 +293,18 @@ pieces_and_traits = db.Table('pieces_and_traits',
     db.Column('trait_id', db.Integer, db.ForeignKey('traits.id'), primary_key=True)
 )
 
+#many-to-many relationship between pieces and keywords
+# pieces_and_keywords = db.Table('pieces_and_keywords',
+#     db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
+#     db.Column('keyword_id', db.Integer, db.ForeignKey('keywords.id'), primary_key=True)
+# )
+
+#many-to-many relationship between pieces and team habilities
+#pieces_and_team_habilites = db.Table('pieces_and_team_habilites',
+#    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
+#    db.Column('team_hability_id', db.Integer, db.ForeignKey('team_habilities.id'), primary_key=True)
+#)
+
 class Pieces(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     piece_name = db.Column(db.String(64), index=True)
@@ -296,6 +326,9 @@ class Pieces(db.Model):
     dial_def = db.relationship('Dial_Defense', backref='ddefense', lazy='dynamic')
     dial_dam = db.relationship('Dial_Damage', backref='ddamage', lazy='dynamic')
     pieces_traits = db.relationship('Traits', secondary=pieces_and_traits, backref=db.backref('trait', lazy='dynamic'))
+    pieces_traits = db.relationship('Team', secondary=team_and_pieces, backref=db.backref('team', lazy='dynamic'))
+    #pieces_keywords = db.relationship('Keywords', secondary=pieces_and_keywords, backref=db.backref('keyword', lazy='dynamic'))
+    #pieces_team_habilites = db.relationship('Team_Habilities', secondary=pieces_and_team_habilites, backref=db.backref('team_hability', lazy='dynamic'))
 
     def __repr__(self):
         return '<Piece {}>'.format(self.piece_name)
@@ -308,4 +341,33 @@ class Traits(db.Model):
     def __repr__(self):
         return '<Trait {}>'.format(self.trait_name)
 
-#pensar em como criar os relacionamentos da keyword, team hability e additional team hability com pieces
+#many-to-many relationship between keywords and additional team habilities
+#keywords_and_additional_thab = db.Table('keywords_and_additional_thab',
+#    db.Column('keyword_id', db.Integer, db.ForeignKey('keywords.id'), primary_key=True),
+#    db.Column('additional_thab_id', db.Integer, db.ForeignKey('add_team_habilities.id'), primary_key=True)
+#)
+
+class Keywords(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    key_name = db.Column(db.String(25), index=True)
+    #keywords_add_team_habilities = db.relationship('Add_Team_Habilities', secondary=keywords_and_additional_thab, backref=db.backref('additional_team_hability', lazy='dynamic'))
+
+    def __repr__(self):
+        return '<Keyword {}>'.format(self.key_name)
+
+#class Team_Habilities(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    teamh_name = db.Column(db.String(20), index=True)
+#    teamh_description = db.Column(db.String(300), index=True)
+#
+#    def __repr__(self):
+#        return '<Team Hability {}>'.format(self.teamh_name)
+
+#class Add_Team_Habilities(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    add_teamh_name = db.Column(db.String(20), index=True)
+#    add_teamh_point = db.Column(db.Integer, index=True)
+#    add_teamh_description = db.Column(db.String(300), index=True)
+#
+#    def __repr__(self):
+#        return '<Additional Team Hability {}>'.format(self.add_teamh_name)
