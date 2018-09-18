@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash
 from app import app, db
 from app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Collection, Pieces, Dial_Attack, Dial_Damage, Dial_Defense, Dial_Movement
+from app.models import User, Collection, Pieces, Dial_Attack, Dial_Damage, Dial_Defense, Dial_Movement, Team
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -21,7 +21,7 @@ def col(id):
     #ncol = Collection.query.get(int(id))
     col = Pieces.query.filter_by(collection_id=int(id)).all()
     #return '<h1>{}</h1>'.format(id)
-    return render_template('colpieces.html', col=col, col2=col2, title='Collection Pieces')
+    return render_template('colpieces.html', col=col, title='Collection Pieces')
 
 @app.route('/pieces/<id>', methods=['GET', 'POST'])
 def pieces(id):
