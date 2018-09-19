@@ -83,3 +83,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
 
     return render_template('user.html', user=user)
+
+@app.route('/createteam', methods=['POST'])
+def createteam():
+    return '<h1>{}</h1>'.format(request.form['t_name'])

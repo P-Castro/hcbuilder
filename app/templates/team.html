@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1> Create Team</h1>
+ <div>
+     <form action="/createteam" method="post">
+     <input type="text" name="t_name">
+     <input type="text" name="t_point">
+     <input type="text" name="t_desc">
+     </form>
+ </div>
+{% endblock %}
