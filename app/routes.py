@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash
 from app import app, db
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, CreateTeam
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Collection, Pieces, Dial_Attack, Dial_Damage, Dial_Defense, Dial_Movement, Team
 from werkzeug.urls import url_parse
@@ -84,6 +84,15 @@ def user(username):
 
     return render_template('user.html', user=user)
 
-@app.route('/createteam', methods=['POST'])
-def createteam():
-    return '<h1>{}</h1>'.format(request.form['t_name'])
+@app.route('/team', methods=['GET','POST'])
+def team():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = CreateTeam()
+
+    team = Team(team_name=form.team_name.data, team_point=form.team_point.data)
+    db.session.add(team)
+    db.session.commit()
+    flash('team created successfully')
+    return render_template('team.html', title='CreateTeam', form=form)

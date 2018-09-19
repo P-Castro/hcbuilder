@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, Form, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
-from app.models import User
+from app.models import User, Team
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -25,3 +25,8 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class CreateTeam(FlaskForm):
+    team_name = StringField('Username')
+    team_point = StringField('Email')
+    submit = SubmitField('Criar')

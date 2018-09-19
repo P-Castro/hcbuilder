@@ -2,11 +2,27 @@
 
 {% block content %}
 <h1> Create Team</h1>
- <div>
-     <form action="/createteam" method="post">
-     <input type="text" name="t_name">
-     <input type="text" name="t_point">
-     <input type="text" name="t_desc">
-     </form>
- </div>
+<div class="container">
+  <div class="jumbotron">
+    <form class="form-signin" method="post">
+      {{ form.hidden_tag() }}
+      <h2 class="form-signin-heading">Create Team</h2>
+      <p>
+        {{ form.team_name.label }}<br>
+        {{ form.team_name(size=32) }}<br>
+        {% for error in form.team_name.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.team_point.label }}<br>
+        {{ form.team_point(size=64) }}
+        {% for error in form.team_point.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>{{ form.submit() }}</p>
+    </form>
+  </div>
+</div>
 {% endblock %}
