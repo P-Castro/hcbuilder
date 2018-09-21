@@ -27,6 +27,6 @@ class RegisterForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 class CreateTeam(FlaskForm):
-    team_name = StringField('Username')
-    team_point = StringField('Email')
+    team_name = StringField('Team Name')
+    team_point = StringField('Team Point')
     submit = SubmitField('Criar')
