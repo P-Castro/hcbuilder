@@ -88,16 +88,15 @@ def user(username):
 @login_required
 def newteam(id):
     form = CreateTeam()
-    #id = User.query.filter_by(id=id).first_or_404()
 
     if form.validate_on_submit():
        #id = User.query.filter_by(id = id).first_or_404()
-       team = Team(team_name=form.team_name.data, team_point=form.team_point.data)
-       team.set_user_id(id.user_id)
+       team = Team(team_name=form.team_name.data, team_point=form.team_point.data, user_id=id)
+       #team.set_user_id(id)
        db.session.add(team)
        db.session.commit()
        flash('team created successfully')
-       return redirect(url_for('myteam'))
+       return redirect(url_for('myteam', id=current_user.id))
     return render_template('newteam.html', form=form, title='Team')
 
 #@app.route('/create', methods=['GET','POST'])
@@ -108,8 +107,9 @@ def newteam(id):
 #    flash('team created successfully')
 #    return redirect(url_for('myteam'))
 
-@app.route('/myteam')
+@app.route('/myteam/<id>')
 @login_required
-def myteam():
-    myteam = Team.query.all()
+def myteam(id):
+
+    myteam = Team.query.filter_by(user_id=id)
     return render_template('myteam.html', myteam=myteam, title='Team')

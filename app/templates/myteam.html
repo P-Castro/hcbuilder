@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<button type="button"><a href="{{url_for('newteam')}}">New Team</a></button>
+<button type="button"><a href="{{url_for('newteam', id=current_user.id)}}">New Team</a></button>
  <h1> Lista de Times </h1>
     <div>
         <ul>
