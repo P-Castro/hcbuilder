@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash
 from app import app, db
 from app.forms import LoginForm, RegisterForm, CreateTeam
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Collection, Pieces, Dial_Attack, Dial_Damage, Dial_Defense, Dial_Movement, Team
+from app.models import User, Collection, Pieces, Dial_Attack, Dial_Damage, Dial_Defense, Dial_Movement, Team, team_and_pieces
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -97,6 +97,13 @@ def newteam(id):
        return redirect(url_for('myteam', id=current_user.id))
     return render_template('newteam.html', form=form, title='Team')
 
+@app.route('/teampi/<id>')
+@login_required
+def teampi():
+
+ teampi = Pieces.query.filter_by(Pieces.pieces_team.contains(team_id=int(id))).all()
+
+ return render_template('colpieces.html', teampi=teampi, title='Team Pieces')
 
 @app.route('/myteam')
 @login_required

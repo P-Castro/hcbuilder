@@ -34,21 +34,24 @@ class Collection(db.Model):
     def __repr__(self):
         return '<Collection {}>'.format(self.colle_name)
 
+#many-to-many relationship between Team and Pieces
+team_and_pieces = db.Table('team_and_pieces',
+    db.Column('team_id', db.Integer, db.ForeignKey('team.id')),
+    db.Column('piece_id',  db.Integer,  db.ForeignKey('pieces.id'))
+)
+
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     team_name = db.Column(db.String(64), index=True)
     team_point = db.Column(db.Integer, index=True)
     team_desc = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pieces_team = db.relationship('Pieces', secondary=team_and_pieces, backref=db.backref('teampi', lazy='dynamic'))
 
     def __repr__(self):
         return '<Team {}>'.format(self.team_name)
 
-#many-to-many relationship between Team and Pieces
-team_and_pieces = db.Table('team_and_pieces',
-    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
-    db.Column('team_id',  db.Integer,  db.ForeignKey('team.id'), primary_key=True)
-)
+
 
 
 class Dial_Movement(db.Model):
@@ -288,10 +291,10 @@ class Dial_Damage(db.Model):
         return '<Dial_Damage {}>'.format(self.id)
 
 #many-to-many relationship between pieces and traits
-pieces_and_traits = db.Table('pieces_and_traits',
-    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
-    db.Column('trait_id', db.Integer, db.ForeignKey('traits.id'), primary_key=True)
-)
+#pieces_and_traits = db.Table('pieces_and_traits',
+#    db.Column('piece_id', db.Integer, db.ForeignKey('pieces.id'), primary_key=True),
+#    db.Column('trait_id', db.Integer, db.ForeignKey('traits.id'), primary_key=True)
+#)
 
 #many-to-many relationship between pieces and keywords
 # pieces_and_keywords = db.Table('pieces_and_keywords',
@@ -325,8 +328,7 @@ class Pieces(db.Model):
     dial_atk = db.relationship('Dial_Attack', backref='datack', lazy='dynamic')
     dial_def = db.relationship('Dial_Defense', backref='ddefense', lazy='dynamic')
     dial_dam = db.relationship('Dial_Damage', backref='ddamage', lazy='dynamic')
-    pieces_traits = db.relationship('Traits', secondary=pieces_and_traits, backref=db.backref('trait', lazy='dynamic'))
-    pieces_traits = db.relationship('Team', secondary=team_and_pieces, backref=db.backref('team', lazy='dynamic'))
+    #pieces_traits = db.relationship('Traits', secondary=pieces_and_traits, backref=db.backref('trait', lazy='dynamic'))
     #pieces_keywords = db.relationship('Keywords', secondary=pieces_and_keywords, backref=db.backref('keyword', lazy='dynamic'))
     #pieces_team_habilites = db.relationship('Team_Habilities', secondary=pieces_and_team_habilites, backref=db.backref('team_hability', lazy='dynamic'))
 

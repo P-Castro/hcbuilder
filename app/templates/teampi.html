@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Lista de Peças</h2>
+  <div>
+      <ul>
+        {% for teampi in teampi %}
+        <li style="font-size: 30pt"><a href="{{ url_for('pieces', id=teampi.id) }}">{{ teampi.piece_number, teampi.piece_name }}</li>
+        {% endfor %}
+      </ul>
+  </div>
+{% endblock %}

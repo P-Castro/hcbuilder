@@ -5,7 +5,7 @@
     <div>
         <ul>
          {% for myteam in myteam %}
-          <li style="font-size: 30pt"><a href="{{ url_for('myteam', id=myteam.id) }}">{{ myteam.team_name }}</a></li>
+          <li style="font-size: 30pt"><a href="{{ url_for('teampi', id=myteam.id) }}">{{ myteam.team_name }}</a></li>
          {% endfor %}
         </ul>
     </div>
