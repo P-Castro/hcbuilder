@@ -99,10 +99,10 @@ def newteam(id):
 
 @app.route('/teampi/<id>')
 @login_required
-def teampi():
-
- teampi = Pieces.query.filter_by(Pieces.pieces_team.contains(team_id=int(id))).all()
-
+def teampi(id):
+ teampi = Pieces.query.filter_by(Pieces.team_pieces(int(id)).all
+ #teampi = Pieces.query.filter_by().all()
+ #return '<h1>{}</h1>'.format(pieceid)
  return render_template('colpieces.html', teampi=teampi, title='Team Pieces')
 
 @app.route('/myteam')
