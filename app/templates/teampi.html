@@ -4,7 +4,7 @@
   <div>
       <ul>
         {% for teampi in teampi %}
-        <li style="font-size: 30pt"><a href="{{ url_for('pieces', id=teampi.id) }}">{{ teampi.piece_number, teampi.piece_name }}</li>
+        <li style="font-size: 30pt"><a href="{{ url_for('pieces', id=teampi.id) }}">{{ teampi.piece_number, teampi.piece_name, teampi.piece_point }}</li>
         {% endfor %}
       </ul>
   </div>

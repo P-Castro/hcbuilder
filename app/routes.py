@@ -100,10 +100,14 @@ def newteam(id):
 @app.route('/teampi/<id>')
 @login_required
 def teampi(id):
- teampi = Pieces.query.filter_by(Pieces.team_pieces(int(id)).all
+ #for p in session.query(Pieces).all
+
+
+ #teampi = Pieces.query.join(team_and_pieces, (team_and_pieces.c.team_id==int(id))).all()
+ teampi = Pieces.query.join(team_and_pieces, (team_and_pieces.c.piece_id == Pieces.id)).filter(team_and_pieces.c.team_id == int(id)).all()
  #teampi = Pieces.query.filter_by().all()
  #return '<h1>{}</h1>'.format(pieceid)
- return render_template('colpieces.html', teampi=teampi, title='Team Pieces')
+ return render_template('teampi.html', teampi=teampi, title='Team Pieces')
 
 @app.route('/myteam')
 @login_required

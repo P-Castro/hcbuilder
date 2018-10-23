@@ -46,7 +46,7 @@ class Team(db.Model):
     team_point = db.Column(db.Integer, index=True)
     team_desc = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    pieces_team = db.relationship('Pieces',backref='pteam', lazy='dynamic', secondary=team_and_pieces)
+    pieces_team = db.relationship('Team', secondary=team_and_pieces, primaryjoin=(team_and_pieces.c.team_id == id), backref=db.backref('team_and_pieces', lazy='dynamic'))
 
     def __repr__(self):
         return '<Team {}>'.format(self.team_name)
@@ -328,7 +328,7 @@ class Pieces(db.Model):
     dial_atk = db.relationship('Dial_Attack', backref='datack', lazy='dynamic')
     dial_def = db.relationship('Dial_Defense', backref='ddefense', lazy='dynamic')
     dial_dam = db.relationship('Dial_Damage', backref='ddamage', lazy='dynamic')
-    team_pieces = db.relationship('Team', secondary=team_and_pieces, backref=db.backref('teampi', lazy='dynamic'))
+    team_pieces = db.relationship('Pieces', secondary=team_and_pieces, primaryjoin=(team_and_pieces.c.piece_id == id), backref=db.backref('team_and_pieces', lazy='dynamic'))
     #pieces_traits = db.relationship('Traits', secondary=pieces_and_traits, backref=db.backref('trait', lazy='dynamic'))
     #pieces_keywords = db.relationship('Keywords', secondary=pieces_and_keywords, backref=db.backref('keyword', lazy='dynamic'))
     #pieces_team_habilites = db.relationship('Team_Habilities', secondary=pieces_and_team_habilites, backref=db.backref('team_hability', lazy='dynamic'))
